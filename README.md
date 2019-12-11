@@ -1,7 +1,9 @@
 TO-DO:
 
-SERVICES
-ROUTES, 
+ADD CONTRIBUTION ROUTE
+SANITIZE
+MAKE 400 PATHS
+TESTS
 
 recipes - get, post
 ingredient - post 

@@ -20,22 +20,14 @@ const RecipesService = {
             .from('recipe')
             .select(
                 'ingredient.ingredient_name as ingredient',
-                'users.user_name as contributor'
+                'users.user_name as contributor',
+                'recipe.recipe_name as recipe'
             )
             .leftJoin('contribution', 'recipe.id', '=', 'contribution.recipe_id')
             .leftJoin('ingredient', 'ingredient.id', '=', 'contribution.ingredient_id')
             .leftJoin('users', 'users.id', '=', 'contribution.user_id')
             .where('recipe.id', id)
     },
-    contributeToRecipe(db, contribution) {
-        return db
-            .insert(contribution)
-            .into('contribution')
-            .returning('*')
-            .then(rows => {
-                return rows[0]
-            })
-    }
 }
 
 module.exports = RecipesService
