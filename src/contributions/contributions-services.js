@@ -1,14 +1,18 @@
 const xss = require('xss')
 
-const ContributionServices =  {
-    getContributionsByUser(db, id){
+const ContributionServices = {
+    getAllContributions(db) {
+        return db.from('contribution').select('*')
+    },
+    getContributionsByUser(db, id) {
         //return all contributions by a user
-        return db 
+        return db
             .from('contribution')
             .select(
-             'users.user_name as contributor',
-             'ingredient.ingredient_name as ingredient',
-             'recipe.recipe_name as recipe'
+                'users.user_name as contributor',
+                'ingredient.ingredient_name as ingredient',
+                'recipe.recipe_name as recipe',
+                'contribution.id as id'
             )
             .join('recipe', 'contribution.recipe_id', 'recipe.id')
             .join('ingredient', 'ingredient.id', 'contribution.ingredient_id')
@@ -27,11 +31,17 @@ const ContributionServices =  {
     sanitizeContribution(contribution) {
         const { contribution_name } = contribution
         return {
-            contribution_name: xss(contribution_name), 
+            contribution_name: xss(contribution_name),
             ingredient_id: contribution.ingredient_id,
             recipe_id: contribution.recipe_id,
             user_id: contribution.user_id
         }
+    },
+
+    deleteContribution(db, id) {
+        return db('contribution')
+            .where('contribution.id', id)
+            .delete()
     }
 }
 

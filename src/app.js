@@ -19,6 +19,13 @@ app.use(morgan(morganOption))
 app.use(cors())
 app.use(helmet())
 
+app.get('/api/protected', (req,res,next) => {
+  res.json({
+    test: 'this is protected'
+  })
+})
+
+
 app.use('/api/recipes', recipesRouter)
 app.use('/api/ingredients', ingredientsRouter )
 app.use('/api/contributions', contributionsRouter)

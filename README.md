@@ -12,7 +12,7 @@ TESTS
 
 seeding script:
 
-psql -U dunder_mifflin -d recipe-builder -f ./seeds/seed.recipe-builder.sql
+npm run migrate -- 0 && npm run migrate && psql -U dunder_mifflin -d recipe-builder -f ./seeds/seed.recipe-builder.sql && npm run dev
 
 join recipe table w/ contributions 
 

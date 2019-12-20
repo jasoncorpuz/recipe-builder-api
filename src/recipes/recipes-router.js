@@ -1,5 +1,6 @@
 const express = require('express')
 const RecipesService = require('./recipes-services')
+const path = require('path')
 
 const recipesRouter = express.Router()
 const jsonBodyParser = express.json()
@@ -10,6 +11,23 @@ recipesRouter
         RecipesService.getAllRecipes(req.app.get('db'))
             .then(recipes => {
                 res.json(recipes)
+            })
+            .catch(next)
+    })
+    .post(jsonBodyParser, (req, res, next) => {
+        const { recipe_name , completed} = req.body
+        const newRecipe = {recipe_name, completed}
+        // if (!recipe_name) {
+        //     return res.status(400).json({
+        //         error: 'Name not provided'
+        //     })
+        // }
+
+        RecipesService.generateRecipeName(req.app.get('db'), newRecipe)
+            .then(r => {
+                res.status(201)
+                    .location(path.posix.join(req.originalUrl, `/${r.id}`))
+                    .json(r)
             })
             .catch(next)
     })
@@ -25,9 +43,26 @@ recipesRouter
                         error: 'Recipe not found'
                     })
                 }
+                res.send(rec)
             })
             .catch(next)
     })
+    .patch(jsonBodyParser,(req, res, next) => {
+        const { recipe_name, completed } = req.body
+        const updatedRecipe = { recipe_name, completed }
+        console.log(req.params.id)
+        RecipesService.updateRecipe(req.app.get('db'), req.params.recipe_id, updatedRecipe)
+         .then(rec => {
+             if(!rec) {
+                 return res.status(404).send(`bookmark not found`)
+             }
+         })
+         .then(numRowsAffected => {
+             res.status(204).end()
+         })
+         .catch(next)
+    })
+
 
 
 module.exports = recipesRouter
