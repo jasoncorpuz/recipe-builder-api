@@ -1,6 +1,7 @@
 const express = require('express')
 const ContributionsServices = require('./contributions-services')
 const path = require('path')
+const requireAuth = require('../middleware/jwt-auth')
 
 
 const contributionsRouter = express.Router()
@@ -8,6 +9,7 @@ const jsonBodyParser = express.json()
 
 contributionsRouter
     .route('/')
+    .all(requireAuth)
     .get((req, res, next) => {
         ContributionsServices.getAllContributions(req.app.get('db'))
             .then(cont => {
@@ -16,7 +18,8 @@ contributionsRouter
             .catch(next)
     })
     .post(jsonBodyParser, (req, res, next) => {
-        const { contribution_name, ingredient_id, recipe_id, user_id } = req.body
+        const { contribution_name, ingredient_id, recipe_id } = req.body
+        const user_id = req.user.id
 
         if (!contribution_name) {
             return res.status(400).json({

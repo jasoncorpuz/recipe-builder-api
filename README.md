@@ -23,3 +23,5 @@ users.user_name as contributor
 FROM recipe JOIN contribution ON recipe.id = contribution.recipe_id
 JOIN ingredient ON ingredient.id = contribution.ingredient_id
 JOIN users ON users.id = contribution.user_id;
+
+bcrypt.hash('Hermione..33', 12).then(hash => console.log({ hash }))

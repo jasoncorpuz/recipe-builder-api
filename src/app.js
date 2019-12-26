@@ -7,6 +7,9 @@ const { NODE_ENV } = require('./config')
 const ingredientsRouter = require('./ingredients/ingredients-router')
 const recipesRouter = require('./recipes/recipes-router')
 const contributionsRouter = require('./contributions/contributions-router')
+const authRouter = require('./auth/auth-router')
+const userRouter = require('./users/users-router')
+const jwt = require('jsonwebtoken')
 
 
 const app = express()
@@ -19,16 +22,11 @@ app.use(morgan(morganOption))
 app.use(cors())
 app.use(helmet())
 
-app.get('/api/protected', (req,res,next) => {
-  res.json({
-    test: 'this is protected'
-  })
-})
-
-
+app.use('/api/users', userRouter)
 app.use('/api/recipes', recipesRouter)
 app.use('/api/ingredients', ingredientsRouter )
 app.use('/api/contributions', contributionsRouter)
+app.use('/api/auth', authRouter)
 
 
   app.use(function errorHandler(error, req, res, next) {

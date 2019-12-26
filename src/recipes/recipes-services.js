@@ -22,6 +22,7 @@ const RecipesService = {
                 'ingredient.ingredient_name as ingredient',
                 'ingredient.id as ingredient_id',
                 'users.user_name as contributor',
+                'users.id as user_id',
                 'recipe.recipe_name as recipe',
                 'recipe.id as recipe_id',
                 'contribution.id as id'

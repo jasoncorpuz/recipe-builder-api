@@ -12,7 +12,10 @@ const ContributionServices = {
                 'users.user_name as contributor',
                 'ingredient.ingredient_name as ingredient',
                 'recipe.recipe_name as recipe',
+                'recipe.id as recipe_id',
+                'recipe.completed as completed',
                 'contribution.id as id'
+
             )
             .join('recipe', 'contribution.recipe_id', 'recipe.id')
             .join('ingredient', 'ingredient.id', 'contribution.ingredient_id')
