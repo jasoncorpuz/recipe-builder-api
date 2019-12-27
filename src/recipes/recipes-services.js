@@ -32,6 +32,23 @@ const RecipesService = {
             .leftJoin('users', 'users.id', '=', 'contribution.user_id')
             .where('recipe.id', id)
     },
+    getRecipeByUser(db,id) {
+        return db 
+         .from('recipe')
+         .select(
+             'recipe.recipe_name as recipe',
+             'recipe.id as recipe_id',
+             'users.user_name as contributor',
+             'users.id as user_id',
+             'contribution.contribution_name as contribution name',
+             'ingredient.ingredient_name as ingredient'
+         )
+         .leftJoin('contribution', 'recipe.id', '=', 'contribution.recipe_id')
+         .leftJoin('ingredient', 'ingredient.id', '=', 'contribution.ingredient_id')
+         .leftJoin('users', 'users.id', '=', 'contribution.user_id')
+         .where('users.id', id)
+    },
+
     generateRecipeName(db, name) {
         return db
             .insert(name)

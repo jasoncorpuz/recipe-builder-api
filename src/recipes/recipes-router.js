@@ -54,7 +54,7 @@ recipesRouter
         RecipesService.updateRecipe(req.app.get('db'), req.params.recipe_id, updatedRecipe)
          .then(rec => {
              if(!rec) {
-                 return res.status(404).send(`bookmark not found`)
+                 return res.status(404).send(`recipe not found`)
              }
          })
          .then(numRowsAffected => {
@@ -63,6 +63,19 @@ recipesRouter
          .catch(next)
     })
 
+recipesRouter
+ .route('/user/:id')
+ .get((req,res,next) => {
+    RecipesService.getRecipeByUser(req.app.get('db'), req.params.id)
+     .then(rec => {
+         if (!rec) {
+             return res.status(404).send('user not found')
+         }
+        res.send(rec)    
+     })
+     
+     .catch(next)
+ })
 
 
 module.exports = recipesRouter
