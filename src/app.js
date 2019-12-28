@@ -28,6 +28,10 @@ app.use('/api/ingredients', ingredientsRouter )
 app.use('/api/contributions', contributionsRouter)
 app.use('/api/auth', authRouter)
 
+app.get('/', (req, res, next) => {
+  res.send('hello world')
+})
+
 
   app.use(function errorHandler(error, req, res, next) {
       let response

@@ -38,6 +38,7 @@ const RecipesService = {
          .select(
              'recipe.recipe_name as recipe',
              'recipe.id as recipe_id',
+             'recipe.completed as completed',
              'users.user_name as contributor',
              'users.id as user_id',
              'contribution.contribution_name as contribution name',
