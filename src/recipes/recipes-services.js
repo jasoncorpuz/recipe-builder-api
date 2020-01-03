@@ -1,5 +1,4 @@
-const xss = require('xss')
-
+const xss = require ('xss')
 const RecipesService = {
     getAllRecipes(db) {
         // return db
