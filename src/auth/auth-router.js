@@ -13,7 +13,7 @@ authRouter
         for (const [key, value] of Object.entries(loginUser))
             if (value === null)
                 return res.status(400).json({
-                    error: `Missing '${key}' in request body`
+                    error: `Missing username or password in request body`
                 })
         AuthService.getUserWithUserName(
             req.app.get('db'),
@@ -23,7 +23,7 @@ authRouter
                 console.log(dbUser)
                 if (!dbUser) 
                     return res.status(401).json({
-                        error: 'Incorrect user_name or password',
+                        error: 'Incorrect username or password',
                     })
 
                 return AuthService.comparePasswords(loginUser.password, dbUser.password)
@@ -31,7 +31,7 @@ authRouter
                         console.log(compareMatch)
                         if (!compareMatch)
                             return res.status(400).json({
-                                error: 'Incorrect user_name or password',
+                                error: 'Incorrect username or password',
                             })
                         req.user = dbUser
                         const sub = dbUser.user_name
