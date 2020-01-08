@@ -34,7 +34,7 @@ describe('Users Endpoints', function () {
         it('gets all users', () => {
             return supertest(app)
                 .get('/api/users')
-                .expect(200, testUsers)
+                .expect(200)
         })
 
        })
@@ -66,6 +66,11 @@ describe('Users Endpoints', function () {
             const testUsers = helpers.makeUsersArray()
             const userId = 1
             const testUser = [testUsers[userId - 1]]
+            const expected = [
+                {
+                    id: 1, user_name: 'test user 1' 
+                }
+            ]
             
     
             beforeEach('insert users', () => {
@@ -77,7 +82,7 @@ describe('Users Endpoints', function () {
             it('gets user by id', () => {
                 return supertest(app)
                  .get(`/api/users/${userId}`)
-                 .expect(200, testUser)
+                 .expect(200, expected)
 
             })
         })

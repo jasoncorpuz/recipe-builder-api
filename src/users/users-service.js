@@ -5,11 +5,19 @@ const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*
 
 const UsersService = {
   getAllUsers(db) {
-    return db.select('*').from('users')
+    return db
+    .select(
+      "id",
+      "user_name"
+      )
+    .from('users')
   },
   getUserbyId(db,id) {
     return db('users') 
-    .select('*')
+    .select(
+      "id",
+      "user_name"
+      )
     .where('id',id)
   },
   hasUserWithUserName(db, user_name) {

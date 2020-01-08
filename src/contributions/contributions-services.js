@@ -11,6 +11,7 @@ const ContributionServices = {
             .select(
                 'users.user_name as contributor',
                 'ingredient.ingredient_name as ingredient',
+                'contribution.contribution_name as contribution_name',
                 'recipe.recipe_name as recipe',
                 'recipe.id as recipe_id',
                 'recipe.completed as completed',

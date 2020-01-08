@@ -94,4 +94,36 @@ describe('Contributions Endpoints', function () {
 
         })
     })
+
+    describe('DELETE /contribution by id', () => {
+        const testRecipes = helpers.makeRecipes()
+        const testCont = helpers.makeContributionsArray()
+        const testUsers = helpers.makeUsersArray()
+        const validUser = testUsers[0]
+
+        beforeEach(
+            async () => {
+            await db.into('recipe').insert(testRecipes)
+            await db.into('users').insert(testUsers)
+            await db.into('contribution').insert(testCont)
+        })
+   
+        it('removes contribution by ID from the store', () => {
+            const idToRemove = 2
+            const expectedContributions = testCont.filter(cont => cont.id !== idToRemove)
+            return supertest(app)
+              .delete(`/api/contributions/${idToRemove}`)
+              .set('Authorization', helpers.makeAuthHeader(validUser))
+              .expect(204)
+              .then(() =>
+                supertest(app)
+                  .get(`/api/contributions`)
+                  .set('Authorization', helpers.makeAuthHeader(validUser))
+                  .expect(expectedContributions)
+              )
+          })
+
+
+
+    })
 })
