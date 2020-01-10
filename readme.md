@@ -108,7 +108,7 @@ Post '/contributions'\
     Posts a contribution to a random recipe. User log in required.\
     ```
     const exampleBody = {
-        contribution_name: 'contribution'
+        contribution_name: 'contribution',\
         ingredient_id: 1
     }
     ```
