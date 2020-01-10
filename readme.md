@@ -5,7 +5,7 @@ This api allows users post contributions as well as get contributions and recipe
 
 ## Users Endpoint
 
-Get '/users'
+Get '/users'\
  Returns all users.
 
 ```
@@ -22,7 +22,7 @@ Get '/users'
 ]
 ```
 
-Get 'user/:user_id'
+Get 'user/:user_id'\
     Returns user with that id.
 
 ```
@@ -35,7 +35,7 @@ Get 'user/:user_id'
 ```
 ## Recipes Endpoint
 
-Get '/recipes'
+Get '/recipes'\
  Returns all recipes and their completed status.
 ```
 [
@@ -52,7 +52,7 @@ Get '/recipes'
     ...
 ]
 ```
-Get 'recipes/:recipe_id'
+Get 'recipes/:recipe_id'\
     Returns recipe by recipe ID. This returns all ingredients in a recipe.
 ```
 [
@@ -79,7 +79,7 @@ Get 'recipes/:recipe_id'
 ```
 ## Contributions Endpoint
 
-Get '/contributions/:user_id' 
+Get '/contributions/:user_id' \
  Gets all contributions by user.
 ```
 [
@@ -104,8 +104,8 @@ Get '/contributions/:user_id'
     ...
 ]
 ```
-Post '/contributions'
-    Posts a contribution to a random recipe. User log in required.
+Post '/contributions'\
+    Posts a contribution to a random recipe. User log in required.\
     ```
     const exampleBody = {
         contribution_name: 'contribution'
