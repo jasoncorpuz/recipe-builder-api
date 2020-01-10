@@ -25,7 +25,7 @@ Get '/users'
 Get 'user/:user_id'
     Returns user with that id.
 
-````
+```
 [
     {
         "id": 1,
