@@ -1,3 +1,4 @@
+  
 const express = require('express')
 const AuthService = require('./auth-service')
 
@@ -12,7 +13,7 @@ authRouter
         for (const [key, value] of Object.entries(loginUser))
             if (value === null)
                 return res.status(400).json({
-                    error: `Missing '${key}' in request body`
+                    error: `Missing username or password in request body`
                 })
         AuthService.getUserWithUserName(
             req.app.get('db'),

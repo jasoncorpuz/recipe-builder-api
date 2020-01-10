@@ -12,7 +12,7 @@
     "deploy": "git push heroku master",
     "seed": "npm run migrate -- 0 && npm run migrate && psql -U dunder_mifflin -d recipe-roulette -f ./seeds/seed.recipe-builder.sql && npm run dev",
     "migrate": "postgrator --config postgrator-config.js",
-    "migrate:production":"env SSL=true DATABASE_URL=$(heroku config:get DATABASE_URL) npm run migrate"
+    "migrate:production": "env SSL=true DATABASE_URL=$(heroku config:get DATABASE_URL) npm run migrate"
   },
   "keywords": [],
   "author": "",
