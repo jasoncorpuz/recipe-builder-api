@@ -22,7 +22,7 @@ Get '/users'\
 ]
 ```
 
-Get 'user/:user_id'\
+Get '/users/:user_id'\
     Returns user with that id.
 
 ```
@@ -52,7 +52,7 @@ Get '/recipes'\
     ...
 ]
 ```
-Get 'recipes/:recipe_id'\
+Get '/recipes/:recipe_id'\
     Returns recipe by recipe ID. This returns all ingredients in a recipe.
 ```
 [
